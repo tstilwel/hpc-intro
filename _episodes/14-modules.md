@@ -1,6 +1,6 @@
 ---
 title: "Accessing software"
-teaching: 30
+teaching: 20
 exercises: 15
 questions:
 - "How do we load and unload software packages?"
@@ -10,7 +10,7 @@ keypoints:
 - "Load software with `module load softwareName`"
 - "Unload software with `module purge`"
 - "The module system handles software versioning and package conflicts for you automatically."
-- "You can edit your `.bashrc` file to automatically load a software package."
+- "You can edit your `.tcshrc` or `.turing_tcshrc` file to automatically load a software package."
 ---
 
 On a high-performance computing system, no software is loaded by default. If we want to use a
@@ -40,7 +40,7 @@ dependencies.
 To see available software modules, use `module avail`
 
 ```
-[remote]$ module avail
+[yourUsername@turing1 ~]$ module avail
 ```
 {: .bash}
 ```
@@ -76,7 +76,7 @@ We can test this by using the `which` command.
 so we can use it to tell us where a particular piece of software is stored.
 
 ```
-[remote]$ which python3
+[yourUsername@turing1 ~]$ which python3
 ```
 {: .bash}
 ```
@@ -92,7 +92,7 @@ so we can use it to tell us where a particular piece of software is stored.
 We can load the `python3` command with `module load`:
 
 ```
-[remote]$ module load python
+[yourUsername@turing1 ~]$ module load python
 [remote[$ which python3
 ```
 {: .bash}
@@ -110,7 +110,7 @@ through for a command before giving up and telling us it can't find it. As with 
 variables we can print it out using `echo`.
 
 ```
-[remote]$ echo $PATH
+[yourUsername@turing1 ~]$ echo $PATH
 ```
 {: .bash}
 ```
@@ -136,7 +136,7 @@ the beginning. When we ran `module load python/3.5.2`, it added this directory t
 our `$PATH`. Let's examine what's there:
 
 ```
-[remote]$ ls /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/python-3.5.2/bin
+[yourUsername@turing1 ~]$ ls /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/python-3.5.2/bin
 ```
 {: .bash}
 ```
@@ -153,7 +153,7 @@ installed at your site, `module load` will also load required software dependenc
 demonstrate, let's use `module list`. `module list` shows all loaded software modules.
 
 ```
-[remote]$ module list
+[yourUsername@turing1 ~]$ module list
 ```
 {: .bash}
 ```
@@ -170,8 +170,8 @@ Currently Loaded Modules:
 {: .output}
 
 ```
-[remote]$ module load beast
-[remote]$ module list
+[yourUsername@turing1 ~]$ module load beast
+[yourUsername@turing1 ~]$ module list
 ```
 {: .bash}
 ```
@@ -195,8 +195,8 @@ So in this case, loading the `beast` module (a bioinformatics software package),
 `java/1.8.0_121` and `beagle-lib/2.1.2` as well. Let's try unloading the `beast` package.
 
 ```
-[remote]$ module unload beast
-[remote]$ module list
+[yourUsername@turing1 ~]$ module unload beast
+[yourUsername@turing1 ~]$ module list
 ```
 {: .bash}
 ```
@@ -216,7 +216,7 @@ So using `module unload` "un-loads" a module along with its dependencies.
 If we wanted to unload everything at once, we could run `module purge` (unloads everything).
 
 ```
-[remote]$ module purge
+[yourUsername@turing1 ~]$ module purge
 ```
 {: .bash}
 ```
@@ -242,7 +242,7 @@ either of these example cases, it helps to be very specific about what software 
 Let's examine the output of `module avail` more closely.
 
 ```
-[remote]$ module avail
+[yourUsername@turing1 ~]$ module avail
 ```
 {: .bash}
 ```
@@ -267,8 +267,8 @@ In this case, `gcc/5.4.0` has a `(D)` next to it. This indicates that it is the 
 `module load gcc`, this is the copy that will be loaded.
 
 ```
-[remote]$ module load gcc
-[remote]$ gcc --version
+[yourUsername@turing1 ~]$ module load gcc
+[yourUsername@turing1 ~]$ gcc --version
 ```
 {: .bash}
 ```
@@ -296,8 +296,8 @@ and `gcc/4.8.5`. To load a non-default module, the only change we need to make t
 command is to leave in the version number after the `/`.
 
 ```
-[remote]$ module load gcc/4.8.5
-[remote]$ gcc --version
+[yourUsername@turing1 ~]$ module load gcc/4.8.5
+[yourUsername@turing1 ~]$ gcc --version
 ```
 {: .bash}
 ```
@@ -320,7 +320,7 @@ program has "inactivated" the module. All this means for us is that if we re-loa
 `module` will remember OpenMPI used to be loaded and load that module as well.
 
 ```
-[remote]$ module load gcc/5.4.0
+[yourUsername@turing1 ~]$ module load gcc/5.4.0
 ```
 {: .bash}
 ```
@@ -366,7 +366,7 @@ As an example we will install the bioinformatics toolkit `seqtk`. We'll first ne
 source code from GitHub using `git`.
 
 ```
-[remote]$ git clone https://github.com/lh3/seqtk.git
+[yourUsername@turing1 ~]$ git clone https://github.com/lh3/seqtk.git
 ```
 {: .bash}
 ```
@@ -382,8 +382,8 @@ Now, using the instructions in the README.md file, all we need to do to complete
 `cd` into the seqtk folder and run the command `make`.
 
 ```
-[remote]$ cd seqtk
-[remote]$ make
+[yourUsername@turing1 ~]$ cd seqtk
+[yourUsername@turing1 ~]$ make
 ```
 {: .bash}
 ```
@@ -398,7 +398,7 @@ seqtk.c:399:16: warning: variable ‘lc’ set but not used [-Wunused-but-set-va
 It's done! Now all we need to do to use the program is invoke it like any other program.
 
 ```
-[remote]$ ./seqtk
+[yourUsername@turing1 ~]$ ./seqtk
 ```
 {: .bash}
 ```
