@@ -74,7 +74,6 @@ the *queue*. To check on our job's status, we check the queue using the command 
 ```
 JOBID     PARTITION NAME     USER      ST      TIME      NODES NODELIST(REASON)
 8878781   main      example- hpc-0061  R       0:05      1     coreV2-25-057
-
 ```
 {: .output}
 
@@ -130,7 +129,6 @@ sleep 120
 ```
 JOBID     PARTITION NAME     USER      ST      TIME      NODES NODELIST(REASON)
 8878784   main      new_name hpc-0061  R       0:03      1     coreV2-25-057
-
 ```
 {: .output}
 
@@ -159,6 +157,8 @@ The following are several key resource requests:
 * `-n <ncores>` - How many cores/tasks does your job need? 
 
 * `-c <cores per task>` - How many cores per task does your job need?
+
+* `-p <partition>` - Which partition/queue does your job need?
 
 * `--mem=<megabytes>` - How much memory on a node does your job need in megabytes? You can also
   specify gigabytes using by adding a little "g" afterwards (example: `--mem=5g`)
@@ -289,5 +289,41 @@ new location, in this case the worker node we are logged on. You can also verify
 `hostname`.
 
 When you are done with the interactive job, type `exit` to quit your session.
+
+### SLURM Partitions
+Your application may require a GPU or a node with higher memory than our standard compute node.  If this is the case, then you can request a specific partition or queue.  These have been segmented from our standard compute resources and grouped together by hardware type.
+
+By default, you will be allocated a node in the main partition. To request another parition, use the `--partition` option.
+
+> ## Requesting a high memory node
+>
+> Submit an interactive job requesting a high memory node.  
+>
+> Hint: You will need to use the `-p himem` option.
+{: .challenge}
+
+If you need a GPU, then you will need to do two things.  First, request the gpu partition.  Then, request the number of GPUs(N) using `--gres=gpu:N`. Let's run through an example using `salloc` to request a single GPU.
+
+```
+[yourUsername@turing1 ~]$ salloc -p gpu --gres=gpu:1
+```
+{: .bash}
+```
+salloc: Pending job allocation 8878800
+salloc: job 8878800 queued and waiting for resources
+salloc: job 8878800 has been allocated resources
+salloc: Granted job allocation 8878800
+This session will be terminated in 7 days. If your application requires
+a longer excution time, please use command "salloc -t N-0" where N is the
+number of days that you need.
+```
+{: .output}
+
+```
+[yourUsername@coreV5-21-v100-001 ~]$ 
+```
+{: .bash}
+
+If you would like to review more in-depth examples, please visit the Turing Case Studies section on our documentation site <a href="https://docs.hpc.odu.edu/#turing-case-studies" title="Turing Case Studies" here</a>
 
 {% include links.md %}
