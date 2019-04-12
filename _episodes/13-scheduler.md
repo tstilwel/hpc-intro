@@ -324,6 +324,6 @@ number of days that you need.
 ```
 {: .bash}
 
-If you would like to review more in-depth examples, please visit the Turing Case Studies section on our documentation site <a href="https://docs.hpc.odu.edu/#turing-case-studies" title="Turing Case Studies" here</a>
+If you would like to review more in-depth examples, please visit the [Turing Case Studies](https://docs.hpc.odu.edu/#turing-case-studies) section on our documentation site. 
 
 {% include links.md %}
